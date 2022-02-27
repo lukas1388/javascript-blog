@@ -12,7 +12,7 @@ function titleClickHandler(event){
         activeLink.classList.remove('active');
     }
 
-    /* [IN PROGRESS] add class 'active' to the clicked link */
+    /* [DONE] add class 'active' to the clicked link */
     clickedElement.classList.add('active');
 
     /* [DONE] remove class 'active' from all articles */
