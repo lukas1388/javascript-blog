@@ -38,7 +38,8 @@ function titleClickHandler(event) {
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
   optTitleListSelector = '.titles',
-  optArticleTagsSelector = '.post-tags .list';
+  optArticleTagsSelector = '.post-tags .list',
+  optArticleAuthorSelector = '.post-author';
 
 function generateTitleLinks(customSelector = '') {
   /* remove contents of titleList */
@@ -159,3 +160,37 @@ function addClickListenersToTags() {
 }
 
 addClickListenersToTags();
+
+function generateAuthors(){
+  const articles = document.querySelectorAll('article');
+  for(let article of articles){
+    const authorWrapper = article.querySelector(optArticleAuthorSelector);
+    // console.log(authorWrapper);
+    // let html = '';
+    const articleAuthor = article.getAttribute('data-author');
+    // console.log(articleAuthor);
+    const linkHTML = '<a href="#">' + articleAuthor + '</a>';
+    // console.log(linkHTML);
+    authorWrapper.innerHTML = linkHTML;
+  }
+}
+
+generateAuthors();
+
+function authorClickHandler(event){
+  event.preventDefault();
+  const clickedElement = this;
+  const author = clickedElement.innerHTML;
+  // console.log('Kliknięto w ' + author);
+  generateTitleLinks('[data-author="' + author + '"]');
+}
+
+function addClickListenersToAuthors(){
+  const allAuthors = document.querySelectorAll('.post-author a');
+  // console.log(allAuthors);
+  for(let author of allAuthors){
+    author.addEventListener('click', authorClickHandler);
+  }
+}
+
+addClickListenersToAuthors();
